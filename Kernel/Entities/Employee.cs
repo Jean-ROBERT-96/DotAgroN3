@@ -37,21 +37,21 @@ namespace Kernel.Entities
             set => SetField(ref this._data.prenom, value);
         }
 
-        [Column("adresse_id")]
+        [ForeignKey("adresse_id")]
         public int AdresseId
         {
             get => this._data.adresseid;
             set => SetField(ref this._data.adresseid, value);
         }
 
-        [Column("societe_id")]
+        [ForeignKey("societe_id")]
         public int SocieteId
         {
             get => this._data.societeid;
             set => SetField(ref this._data.societeid, value);
         }
 
-        [Column("service_id")]
+        [ForeignKey("service_id")]
         public int ServiceId
         {
             get => this._data.serviceid;
