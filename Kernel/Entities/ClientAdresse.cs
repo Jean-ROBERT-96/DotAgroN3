@@ -6,12 +6,20 @@ namespace Kernel.Entities
     [Table("client_adresse")]
     public class ClientAdresse : Entity<ClientAdresse.Data>
     {
+        #region Fields
         public struct Data
         {
             public int clientid;
             public int adresseid;
         }
+        #endregion
 
+        #region Descriptors
+        public static ColumnDescriptor _ClientId { get => (typeof(ClientAdresse), nameof(ClientId)); }
+        public static ColumnDescriptor _AdresseId { get => (typeof(ClientAdresse), nameof(AdresseId)); }
+        #endregion
+
+        #region Properties
         [Key, Column("client_id")]
         public int ClientId
         {
@@ -26,7 +34,8 @@ namespace Kernel.Entities
             set => SetField(ref this._data.adresseid, value);
         }
 
-        public Client ClientFK { get; set; }
-        public Adresse AdresseFK { get; set; }
+        public Client ClientPK { get; set; }
+        public Adresse AdressePK { get; set; }
+        #endregion
     }
 }

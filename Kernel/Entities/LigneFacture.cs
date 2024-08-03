@@ -6,6 +6,7 @@ namespace Kernel.Entities
     [Table("ligne_facture")]
     public class LigneFacture : Entity<LigneFacture.Data>
     {
+        #region Fields
         public struct Data
         {
             public int id;
@@ -16,7 +17,19 @@ namespace Kernel.Entities
             public int factureid;
             public int articleid;
         }
+        #endregion
 
+        #region Descriptors
+        public static ColumnDescriptor _Id { get => (typeof(LigneFacture), nameof(Id)); }
+        public static ColumnDescriptor _NLigne { get => (typeof(LigneFacture), nameof(NLigne)); }
+        public static ColumnDescriptor _Type { get => (typeof(LigneFacture), nameof(Type)); }
+        public static ColumnDescriptor _Quantite { get => (typeof(LigneFacture), nameof(Quantite)); }
+        public static ColumnDescriptor _Libelle { get => (typeof(LigneFacture), nameof(Libelle)); }
+        public static ColumnDescriptor _FactureId { get => (typeof(LigneFacture), nameof(FactureId)); }
+        public static ColumnDescriptor _ArticleId { get => (typeof(LigneFacture), nameof(ArticleId)); }
+        #endregion
+
+        #region Properties
         [Key, Column("id")]
         public int Id
         {
@@ -66,7 +79,7 @@ namespace Kernel.Entities
             set => SetField(ref this._data.articleid, value);
         }
 
-        public Facture FactureFK { get; set; }
         public Article ArticleFK { get; set; }
+        #endregion
     }
 }

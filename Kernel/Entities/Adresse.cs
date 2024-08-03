@@ -6,6 +6,7 @@ namespace Kernel.Entities
     [Table("adresse")]
     public class Adresse : Entity<Adresse.Data>
     {
+        #region Fields
         public struct Data
         {
             public int id;
@@ -20,7 +21,23 @@ namespace Kernel.Entities
             public byte? porte;
             public string? batiment;
         }
+        #endregion
 
+        #region Descriptors
+        public static ColumnDescriptor _Id { get => (typeof(Adresse), nameof(Id)); }
+        public static ColumnDescriptor _Libelle { get => (typeof(Adresse), nameof(Libelle)); }
+        public static ColumnDescriptor _Adresse1 { get => (typeof(Adresse), nameof(Adresse1)); }
+        public static ColumnDescriptor _Adresse2 { get => (typeof(Adresse), nameof(Adresse2)); }
+        public static ColumnDescriptor _Adresse3 { get => (typeof(Adresse), nameof(Adresse3)); }
+        public static ColumnDescriptor _Complement { get => (typeof(Adresse), nameof(Complement)); }
+        public static ColumnDescriptor _CodePostal { get => (typeof(Adresse), nameof(CodePostal)); }
+        public static ColumnDescriptor _Ville { get => (typeof(Adresse), nameof(Ville)); }
+        public static ColumnDescriptor _Etage { get => (typeof(Adresse), nameof(Etage)); }
+        public static ColumnDescriptor _Porte { get => (typeof(Adresse), nameof(Porte)); }
+        public static ColumnDescriptor _Batiment { get => (typeof(Adresse), nameof(Batiment)); }
+        #endregion
+
+        #region Properties
         [Key, Column("id")]
         public int Id
         {
@@ -97,5 +114,6 @@ namespace Kernel.Entities
             get => this._data.batiment;
             set => SetField(ref this._data.batiment, value);
         }
+        #endregion
     }
 }

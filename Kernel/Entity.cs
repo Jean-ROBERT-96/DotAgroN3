@@ -16,10 +16,9 @@ namespace Kernel
 
         protected bool SetField<TField>(ref TField field, TField value, [CallerMemberName] string propertyName = null)
         {
-            TField oldValue = field;
+            if (EqualityComparer<TField>.Default.Equals(field, value)) return false;
             field = value;
             NotifyPropertyChanged(propertyName);
-
             return true;
         }
 

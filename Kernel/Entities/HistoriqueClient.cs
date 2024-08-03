@@ -6,6 +6,7 @@ namespace Kernel.Entities
     [Table("historique_client")]
     public class HistoriqueClient : Entity<HistoriqueClient.Data>
     {
+        #region Fields
         public struct Data
         {
             public int id;
@@ -14,7 +15,17 @@ namespace Kernel.Entities
             public DateTime date;
             public string description;
         }
+        #endregion
 
+        #region Descriptors
+        public static ColumnDescriptor _Id { get => (typeof(HistoriqueClient), nameof(Id)); }
+        public static ColumnDescriptor _SocieteId { get => (typeof(HistoriqueClient), nameof(SocieteId)); }
+        public static ColumnDescriptor _ClientId { get => (typeof(HistoriqueClient), nameof(ClientId)); }
+        public static ColumnDescriptor _Date { get => (typeof(HistoriqueClient), nameof(Date)); }
+        public static ColumnDescriptor _Description { get => (typeof(HistoriqueClient), nameof(Description)); }
+        #endregion
+
+        #region Properties
         [Key, Column("id")]
         public int Id
         {
@@ -52,5 +63,6 @@ namespace Kernel.Entities
 
         public Societe SocieteFK { get; set; }
         public Client ClientFK { get; set; }
+        #endregion
     }
 }

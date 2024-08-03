@@ -6,6 +6,7 @@ namespace Kernel.Entities
     [Table("article")]
     public class Article : Entity<Article.Data>
     {
+        #region Fields
         public struct Data
         {
             public int id;
@@ -14,7 +15,17 @@ namespace Kernel.Entities
             public float txtva;
             public decimal prixttc;
         }
+        #endregion
 
+        #region Descriptors
+        public static ColumnDescriptor _Id { get => (typeof(Article), nameof(Id)); }
+        public static ColumnDescriptor _Libelle { get => (typeof(Article), nameof(Libelle)); }
+        public static ColumnDescriptor _PrixHT { get => (typeof(Article), nameof(PrixHT)); }
+        public static ColumnDescriptor _TxTVA { get => (typeof(Article), nameof(TxTVA)); }
+        public static ColumnDescriptor _PrixTTC { get => (typeof(Article), nameof(PrixTTC)); }
+        #endregion
+
+        #region Properties
         [Key, Column("id")]
         public int Id
         {
@@ -49,5 +60,6 @@ namespace Kernel.Entities
             get => this._data.prixttc;
             set => SetField(ref this._data.prixttc, value);
         }
+        #endregion
     }
 }

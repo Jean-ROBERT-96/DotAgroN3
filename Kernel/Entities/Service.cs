@@ -6,13 +6,22 @@ namespace Kernel.Entities
     [Table("service")]
     public class Service : Entity<Service.Data>
     {
+        #region Fields
         public struct Data
         {
             public int id;
             public string libelle;
             public int societeid;
         }
+        #endregion
 
+        #region Descriptors
+        public static ColumnDescriptor _Id { get => (typeof(Service), nameof(Id)); }
+        public static ColumnDescriptor _Libelle { get => (typeof(Service), nameof(Libelle)); }
+        public static ColumnDescriptor _SocieteId { get => (typeof(Service), nameof(SocieteId)); }
+        #endregion
+
+        #region Properties
         [Key, Column("id")]
         public int Id
         {
@@ -35,5 +44,6 @@ namespace Kernel.Entities
         }
 
         public Societe SocieteFK { get; set; }
+        #endregion
     }
 }

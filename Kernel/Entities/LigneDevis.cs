@@ -6,6 +6,7 @@ namespace Kernel.Entities
     [Table("ligne_devis")]
     public class LigneDevis : Entity<LigneDevis.Data>
     {
+        #region Fields
         public struct Data
         {
             public int id;
@@ -16,7 +17,19 @@ namespace Kernel.Entities
             public int devisid;
             public int articleid;
         }
+        #endregion
 
+        #region Descriptors
+        public static ColumnDescriptor _Id { get => (typeof(LigneDevis), nameof(Id)); }
+        public static ColumnDescriptor _NLigne { get => (typeof(LigneDevis), nameof(NLigne)); }
+        public static ColumnDescriptor _Type { get => (typeof(LigneDevis), nameof(Type)); }
+        public static ColumnDescriptor _Quantite { get => (typeof(LigneDevis), nameof(Quantite)); }
+        public static ColumnDescriptor _Libelle { get => (typeof(LigneDevis), nameof(Libelle)); }
+        public static ColumnDescriptor _DevisId { get => (typeof(LigneDevis), nameof(DevisId)); }
+        public static ColumnDescriptor _ArticleId { get => (typeof(LigneDevis), nameof(ArticleId)); }
+        #endregion
+
+        #region Properties
         [Key, Column("id")]
         public int Id
         {
@@ -66,7 +79,7 @@ namespace Kernel.Entities
             set => SetField(ref this._data.articleid, value);
         }
 
-        public Devis DevisFK { get; set; }
         public Article ArticleFK { get; set; }
+        #endregion
     }
 }

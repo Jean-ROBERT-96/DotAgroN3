@@ -6,6 +6,7 @@ namespace Kernel.Entities
     [Table("employee")]
     public class Employee : Entity<Employee.Data>
     {
+        #region Fields
         public struct Data
         {
             public int id;
@@ -15,7 +16,18 @@ namespace Kernel.Entities
             public int societeid;
             public int serviceid;
         }
+        #endregion
 
+        #region Descriptors
+        public static ColumnDescriptor _Id { get => (typeof(Employee), nameof(Id)); }
+        public static ColumnDescriptor _Nom { get => (typeof(Employee), nameof(Nom)); }
+        public static ColumnDescriptor _Prenom { get => (typeof(Employee), nameof(Prenom)); }
+        public static ColumnDescriptor _AdresseId { get => (typeof(Employee), nameof(AdresseId)); }
+        public static ColumnDescriptor _SocieteId { get => (typeof(Employee), nameof(SocieteId)); }
+        public static ColumnDescriptor _ServiceId { get => (typeof(Employee), nameof(ServiceId)); }
+        #endregion
+
+        #region Properties
         [Key, Column("id")]
         public int Id
         {
@@ -61,5 +73,6 @@ namespace Kernel.Entities
         public Societe SocieteFK { get; set; }
         public Batiment BatimentFK { get; set; }
         public Service ServiceFK { get; set; }
+        #endregion
     }
 }

@@ -6,6 +6,7 @@ namespace Kernel.Entities
     [Table("facture")]
     public class Facture : Entity<Facture.Data>
     {
+        #region Fields
         public struct Data
         {
             public int id;
@@ -22,7 +23,25 @@ namespace Kernel.Entities
             public DateTime datefacturation;
             public DateTime datecreation;
         }
+        #endregion
 
+        #region Descriptors
+        public static ColumnDescriptor _Id { get => (typeof(Facture), nameof(Id)); }
+        public static ColumnDescriptor _ClientId { get => (typeof(Facture), nameof(ClientId)); }
+        public static ColumnDescriptor _DevisId { get => (typeof(Facture), nameof(DevisId)); }
+        public static ColumnDescriptor _AdresseFacturationId { get => (typeof(Facture), nameof(AdresseFacturationId)); }
+        public static ColumnDescriptor _AdresseLivraisonId { get => (typeof(Facture), nameof(AdresseLivraisonId)); }
+        public static ColumnDescriptor _SocieteId { get => (typeof(Facture), nameof(SocieteId)); }
+        public static ColumnDescriptor _MtHT { get => (typeof(Facture), nameof(MtHT)); }
+        public static ColumnDescriptor _MtTVA { get => (typeof(Facture), nameof(MtTVA)); }
+        public static ColumnDescriptor _MtTTC { get => (typeof(Facture), nameof(MtTTC)); }
+        public static ColumnDescriptor _NetAPayer { get => (typeof(Facture), nameof(NetAPayer)); }
+        public static ColumnDescriptor _Reglee { get => (typeof(Facture), nameof(Reglee)); }
+        public static ColumnDescriptor _DateFacturation { get => (typeof(Facture), nameof(DateFacturation)); }
+        public static ColumnDescriptor _DateCreation { get => (typeof(Facture), nameof(DateCreation)); }
+        #endregion
+
+        #region Properties
         [Key, Column("id")]
         public int Id
         {
@@ -119,5 +138,7 @@ namespace Kernel.Entities
         public Adresse AdresseFacturationFK { get; set; }
         public Adresse? AdresseLivraisonFK { get; set; }
         public Devis? DevisFK { get; set; }
+        public IEnumerable<LigneFacture>? LignesFacture { get; set; }
+        #endregion
     }
 }
