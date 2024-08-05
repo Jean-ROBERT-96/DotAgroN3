@@ -1,13 +1,18 @@
-﻿namespace Kernel.Interfaces
+﻿using Kernel.Filters;
+using Kernel.Joins;
+using Kernel.Orders;
+
+namespace Kernel.Interfaces
 {
-    public struct TData;
     public interface IDAL
     {
-        public void Create<T>() where T : Entity<TData>;
-        public void UpdateEntity<T>(T entity) where T : Entity<TData>;
-        public void UpdateEntities<T>(IEnumerable<T> entity) where T : Entity<TData>;
-        public void Delete<T>(T entity) where T : Entity<TData>;
-        public T GetFirstEntity<T>(int id) where T : Entity<TData>;
-        public IEnumerable<T> GetAllEntities<T>() where T : Entity<TData>;
+        public bool Create<T>(T entity) where T : Entity;
+        public bool UpdateEntity<T>(T entity) where T : Entity;
+        public bool UpdateEntities<T>(IEnumerable<T> entity) where T : Entity;
+        public bool Delete<T>(T entity) where T : Entity;
+        public T GetFirstEntity<T>(CFilter? filter = null) where T : Entity;
+        public IEnumerable<T> GetAllEntities<T>(JoinDescriptor[] joins, CFilter filters, SortDirection[]? orders = null) where T : Entity;
+        public IEnumerable<T> GetAllEntities<T>(CFilter filters, SortDirection[]? orders = null) where T : Entity;
+        public IEnumerable<T> GetAllEntities<T>(SortDirection[]? orders = null) where T : Entity;
     }
 }

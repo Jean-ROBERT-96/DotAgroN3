@@ -8,10 +8,13 @@ using System.Threading.Tasks;
 
 namespace Kernel
 {
-    public abstract class Entity<TData> : INotifyPropertyChanged where TData : struct
+    public abstract class Entity<TData> : Entity where TData : struct
     {
         protected TData _data;
+    }
 
+    public abstract class Entity : INotifyPropertyChanged
+    {
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected bool SetField<TField>(ref TField field, TField value, [CallerMemberName] string propertyName = null)

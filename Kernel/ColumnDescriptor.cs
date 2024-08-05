@@ -12,6 +12,12 @@ namespace Kernel
         private Type _entityType;
         private Type _valueType;
 
+        public string PropertyName => _propertyName;
+        public string DataName => _dataName;
+        public string DisplayName => _displayName;
+        public Type EntityType => _entityType;
+        public Type ValueType => _valueType;
+
         public ColumnDescriptor(Type entityType, string propertyName)
         {
             var propertyInfo = entityType.GetProperty(propertyName);
@@ -22,7 +28,7 @@ namespace Kernel
             _displayName = GetDisplayName(propertyInfo);
         }
 
-        public string GetColumnName(PropertyInfo? propertyInfo)
+        private string GetColumnName(PropertyInfo? propertyInfo)
         {
             var foreignKeyAttribute = propertyInfo?.GetCustomAttribute<ForeignKeyAttribute>();
             if (foreignKeyAttribute != null && !string.IsNullOrWhiteSpace(foreignKeyAttribute.Name))
@@ -35,7 +41,7 @@ namespace Kernel
             return string.Empty;
         }
 
-        public string GetDisplayName(PropertyInfo? propertyInfo)
+        private string GetDisplayName(PropertyInfo? propertyInfo)
         {
             var displayAttribute = propertyInfo?.GetCustomAttribute<DisplayAttribute>();
             if (displayAttribute != null && !string.IsNullOrWhiteSpace(displayAttribute.Name))

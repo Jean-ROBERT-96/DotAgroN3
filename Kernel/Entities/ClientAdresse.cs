@@ -20,14 +20,14 @@ namespace Kernel.Entities
         #endregion
 
         #region Properties
-        [Key, Column("client_id")]
+        [Column("client_id")]
         public int ClientId
         {
             get => this._data.clientid;
             set => SetField(ref this._data.clientid, value);
         }
 
-        [Key, Column("adresse_id")]
+        [Column("adresse_id")]
         public int AdresseId
         {
             get => this._data.adresseid;

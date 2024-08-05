@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using Kernel;
+using Kernel.Entities;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +21,18 @@ namespace DotAgroN3
         public MainWindow()
         {
             InitializeComponent();
+            this.CreateAdresse();
+        }
+
+        private void CreateAdresse()
+        {
+            var test = new Adresse();
+            test.Libelle = "test";
+            test.Adresse1 = "18, rue de la Testing";
+            test.CodePostal = 75001;
+            test.Ville = "Paris";
+
+            ServicesManager.DataBase.Create(test);
         }
     }
 }

@@ -65,14 +65,14 @@ namespace Kernel.Entities
             set => SetField(ref this._data.libelle, value);
         }
 
-        [ForeignKey("devis_id")]
+        [Column("devis_id")]
         public int DevisId
         {
             get => this._data.devisid;
             set => SetField(ref this._data.devisid, value);
         }
 
-        [ForeignKey("article_id")]
+        [ForeignKey("article_id"), Column("article_id")]
         public int ArticleId
         {
             get => this._data.articleid;
