@@ -5,15 +5,6 @@ using Microsoft.Extensions.Configuration;
 
 namespace DAL
 {
-    public class DataContextFactory : IDesignTimeDbContextFactory<DataContext>
-    {
-        public DataContext CreateDbContext(string[] args)
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
-            return new DataContext(optionsBuilder.Options);
-        }
-    }
-
     public class DataContext : DbContext
     {
         public DbSet<Adresse> Adresses { get; set; }
@@ -33,16 +24,6 @@ namespace DAL
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                // Remplacez par votre chaîne de connexion
-                var connectionString = "Server=82.112.241.135;Port=2520;Database=dotagro;Uid=root;Pwd=Xyfec148*;";
-                optionsBuilder.UseMySQL(connectionString);
-            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
