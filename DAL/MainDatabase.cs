@@ -24,9 +24,9 @@ namespace DAL
             return true;
         }
 
-        public bool Delete<T>(T entity) where T : Entity
+        public bool Delete<T>(int id) where T : Entity
         {
-            var entityToDelete = _context.Set<T>().Find(entity);
+            var entityToDelete = _context.Set<T>().Find(id);
             if (entityToDelete == null)
                 return false;
 
@@ -35,32 +35,32 @@ namespace DAL
             return true;
         }
 
-        public bool UpdateEntities<T>(IEnumerable<T> entity) where T : Entity
+        public bool UpdateEntities<T>(Dictionary<int, T> entity) where T : Entity
         {
             if(entity == null)
                 return false;
             foreach (var e in entity)
             {
-                var entityToUpdate = _context.Set<T>().Find(e);
+                var entityToUpdate = _context.Set<T>().Find(e.Key);
                 if (entityToUpdate == null)
                     continue;
 
-                _context.Set<T>().Update(entityToUpdate);
-                _context.Attach(entityToUpdate).State = EntityState.Modified;
+                _context.Set<T>().Update(e.Value);
+                _context.Attach(e.Value).State = EntityState.Modified;
             }
 
             _context.SaveChanges();
             return true;
         }
 
-        public bool UpdateEntity<T>(T entity) where T : Entity
+        public bool UpdateEntity<T>(int id, T entity) where T : Entity
         {
-            var entityToUpdate = _context.Set<T>().Find(entity);
+            var entityToUpdate = _context.Set<T>().Find(id);
             if (entityToUpdate == null)
                 return false;
 
-            _context.Set<T>().Update(entityToUpdate);
-            _context.Attach(entityToUpdate).State = EntityState.Modified;
+            _context.Set<T>().Update(entity);
+            _context.Attach(entity).State = EntityState.Modified;
             _context.SaveChanges();
             return true;
         }
@@ -99,7 +99,7 @@ namespace DAL
 
         public T GetFirstEntity<T>(CFilter? filter = null) where T : Entity
         {
-            var query = _context.Set<T>().AsQueryable();
+            var query = _context.Set<T>().AsQueryable<T>();
             if (filter != null)
                 query = ApplyFilters(query, filter);
 
@@ -185,40 +185,40 @@ namespace DAL
             switch (item.Filter)
             {
                 case FilterType.Equal:
-                    query = query.Where(e => EF.Property<object>(e, item.Left.ToString()).Equals(item.Right));
+                    query = query.Where(e => EF.Property<object>(e, item.Left.PropertyName).Equals(item.Right));
                     break;
                 case FilterType.NotEqual:
-                    query = query.Where(e => !EF.Property<object>(e, item.Left.ToString()).Equals(item.Right));
+                    query = query.Where(e => !EF.Property<object>(e, item.Left.PropertyName).Equals(item.Right));
                     break;
                 case FilterType.GreaterThan:
-                    query = query.Where(e => CompareValues(EF.Property<object>(e, item.Left.ToString()), item.Right) > 0);
+                    query = query.Where(e => CompareValues(EF.Property<object>(e, item.Left.PropertyName), item.Right) > 0);
                     break;
                 case FilterType.GreaterThanOrEqual:
-                    query = query.Where(e => CompareValues(EF.Property<object>(e, item.Left.ToString()), item.Right) >= 0);
+                    query = query.Where(e => CompareValues(EF.Property<object>(e, item.Left.PropertyName), item.Right) >= 0);
                     break;
                 case FilterType.LessThan:
-                    query = query.Where(e => CompareValues(EF.Property<object>(e, item.Left.ToString()), item.Right) < 0);
+                    query = query.Where(e => CompareValues(EF.Property<object>(e, item.Left.PropertyName), item.Right) < 0);
                     break;
                 case FilterType.LessThanOrEqual:
-                    query = query.Where(e => CompareValues(EF.Property<object>(e, item.Left.ToString()), item.Right) <= 0);
+                    query = query.Where(e => CompareValues(EF.Property<object>(e, item.Left.PropertyName), item.Right) <= 0);
                     break;
                 case FilterType.Like:
-                    query = query.Where(e => EF.Property<string>(e, item.Left.ToString()).Contains(item.Right.ToString()));
+                    query = query.Where(e => EF.Property<string>(e, item.Left.PropertyName).Contains(item.Right.ToString()));
                     break;
                 case FilterType.NotLike:
-                    query = query.Where(e => !EF.Property<string>(e, item.Left.ToString()).Contains(item.Right.ToString()));
+                    query = query.Where(e => !EF.Property<string>(e, item.Left.PropertyName).Contains(item.Right.ToString()));
                     break;
                 case FilterType.In:
-                    query = query.Where(e => ((IEnumerable<object>)item.Right).Contains(EF.Property<object>(e, item.Left.ToString())));
+                    query = query.Where(e => ((IEnumerable<object>)item.Right).Contains(EF.Property<object>(e, item.Left.PropertyName)));
                     break;
                 case FilterType.NotIn:
-                    query = query.Where(e => !((IEnumerable<object>)item.Right).Contains(EF.Property<object>(e, item.Left.ToString())));
+                    query = query.Where(e => !((IEnumerable<object>)item.Right).Contains(EF.Property<object>(e, item.Left.PropertyName)));
                     break;
                 case FilterType.IsNull:
-                    query = query.Where(e => EF.Property<object>(e, item.Left.ToString()) == null);
+                    query = query.Where(e => EF.Property<object>(e, item.Left.PropertyName) == null);
                     break;
                 case FilterType.IsNotNull:
-                    query = query.Where(e => EF.Property<object>(e, item.Left.ToString()) != null);
+                    query = query.Where(e => EF.Property<object>(e, item.Left.PropertyName) != null);
                     break;
                 default:
                     throw new NotImplementedException();

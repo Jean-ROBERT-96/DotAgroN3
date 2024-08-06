@@ -18,6 +18,6 @@
 
     public abstract class CFilter : List<CFilterItem>
     {
-        public static implicit operator CFilter((object Left, FilterType Filter, object? Right) tuple) => new AndCFilter { tuple };
+        public static implicit operator CFilter((ColumnDescriptor Left, FilterType Filter, object? Right) tuple) => new AndCFilter { tuple };
     }
 }

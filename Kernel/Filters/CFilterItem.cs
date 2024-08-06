@@ -7,11 +7,11 @@
             public CFilter Filter { get; set; }
         }
 
-        public object Left { get; private set; }
+        public ColumnDescriptor Left { get; private set; }
         public object? Right { get; private set; }
         public FilterType Filter { get; private set; }
 
-        public static implicit operator CFilterItem((object Left, FilterType Filter, object? Right) tuple) => new CFilterItem{ Left = tuple.Left, Filter = tuple.Filter, Right = tuple.Right };
+        public static implicit operator CFilterItem((ColumnDescriptor Left, FilterType Filter, object? Right) tuple) => new CFilterItem{ Left = tuple.Left, Filter = tuple.Filter, Right = tuple.Right };
         public static implicit operator CFilterItem(OrCFilter filter)
         {
             var f = new CFilterItemContainer();
