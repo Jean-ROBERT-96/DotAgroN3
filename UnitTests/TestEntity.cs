@@ -39,7 +39,16 @@ namespace UnitTests
             if (obj is TestEntity entity)
                 return entity.Id == this.Id && entity.Data == this.Data;
 
-            return base.Equals(obj);
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(this.Id);
+            hash.Add(this.Data);
+
+            return hash.ToHashCode();
         }
     }
 }
