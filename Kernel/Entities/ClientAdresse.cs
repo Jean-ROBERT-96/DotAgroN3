@@ -37,5 +37,10 @@ namespace Kernel.Entities
         public Client ClientPK { get; set; }
         public Adresse AdressePK { get; set; }
         #endregion
+
+        public override string ToString()
+        {
+            return $"{ClientPK.ToString()}_{AdressePK.ToString()}";
+        }
     }
 }

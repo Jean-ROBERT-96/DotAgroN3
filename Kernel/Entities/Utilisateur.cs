@@ -61,5 +61,22 @@ namespace Kernel.Entities
             set => SetField(ref this._data.password, value);
         }
         #endregion
+
+        public override string ToString()
+        {
+            return $"{this.Nom} {this.Prenom}";
+        }
+        public override bool Equals(object? obj)
+        {
+            if(obj != null && obj is Utilisateur other)
+            {
+                return this.Id == other.Id &&
+                       this.Nom == other.Nom &&
+                       this.Prenom == other.Prenom &&
+                       this.Email == other.Email;
+            }
+
+            return base.Equals(obj);
+        }
     }
 }

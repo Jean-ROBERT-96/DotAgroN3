@@ -115,5 +115,30 @@ namespace Kernel.Entities
             set => SetField(ref this._data.batiment, value);
         }
         #endregion
+
+        public override string ToString()
+        {
+            return this.Libelle;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj != null && obj is Adresse other)
+            {
+                return this.Id == other.Id &&
+                       this.Libelle == other.Libelle &&
+                       this.Adresse1 == other.Adresse1 &&
+                       this.Adresse2 == other.Adresse2 &&
+                       this.Adresse3 == other.Adresse3 &&
+                       this.Complement == other.Complement &&
+                       this.CodePostal == other.CodePostal &&
+                       this.Ville == other.Ville &&
+                       this.Etage == other.Etage &&
+                       this.Porte == other.Porte &&
+                       this.Batiment == other.Batiment;
+            }
+
+            return base.Equals(obj);
+        }
     }
 }

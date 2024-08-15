@@ -55,5 +55,23 @@ namespace Kernel.Entities
         public Societe SocieteFK { get; set; }
         public Adresse AdresseFK { get; set; }
         #endregion
+
+        public override string ToString()
+        {
+            return this.Libelle;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj != null && obj is Batiment)
+            {
+                var other = (Batiment)obj;
+                return this.Id == other.Id &&
+                       this.Libelle == other.Libelle &&
+                       this.AdresseId == other.AdresseId &&
+                       this.SocieteId == other.SocieteId;
+            }
+            return base.Equals(obj);
+        }
     }
 }

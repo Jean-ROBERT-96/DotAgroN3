@@ -140,5 +140,32 @@ namespace Kernel.Entities
         public Devis? DevisFK { get; set; }
         public IEnumerable<LigneFacture>? LignesFacture { get; set; }
         #endregion
+
+        public override string ToString()
+        {
+            return $"F{this.Id}_{this.ClientFK.ToString()}";
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if(obj != null && obj is Facture other)
+            {
+                return this.Id == other.Id &&
+                       this.ClientId == other.ClientId &&
+                       this.DevisId == other.DevisId &&
+                       this.AdresseFacturationId == other.AdresseFacturationId &&
+                       this.AdresseLivraisonId == other.AdresseLivraisonId &&
+                       this.SocieteId == other.SocieteId &&
+                       this.MtHT == other.MtHT &&
+                       this.MtTVA == other.MtTVA &&
+                       this.MtTTC == other.MtTTC &&
+                       this.NetAPayer == other.NetAPayer &&
+                       this.Reglee == other.Reglee &&
+                       this.DateFacturation == other.DateFacturation &&
+                       this.DateCreation == other.DateCreation;
+            }
+
+            return base.Equals(obj);
+        }
     }
 }

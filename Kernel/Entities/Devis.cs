@@ -83,5 +83,26 @@ namespace Kernel.Entities
         public Societe SocieteFK { get; set; }
         public IEnumerable<LigneDevis>? LignesDevis { get; set; }
         #endregion
+
+        public override string ToString()
+        {
+            return $"D{this.Id}_{this.ClientFK.ToString()}";
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj != null && obj is Devis other)
+            {
+                return this.Id == other.Id &&
+                       this.ClientId == other.ClientId &&
+                       this.SocieteId == other.SocieteId &&
+                       this.MtHT == other.MtHT &&
+                       this.MtTVA == other.MtTVA &&
+                       this.MtTTC == other.MtTTC &&
+                       this.DateRedaction == other.DateRedaction;
+            }
+
+            return base.Equals(obj);
+        }
     }
 }

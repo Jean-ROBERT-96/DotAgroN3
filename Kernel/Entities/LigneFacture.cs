@@ -81,5 +81,26 @@ namespace Kernel.Entities
 
         public Article ArticleFK { get; set; }
         #endregion
+
+        public override string ToString()
+        {
+            return this.Libelle;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj != null && obj is LigneFacture other)
+            {
+                return this.Id == other.Id &&
+                       this.NLigne == other.NLigne &&
+                       this.Type == other.Type &&
+                       this.Quantite == other.Quantite &&
+                       this.Libelle == other.Libelle &&
+                       this.FactureId == other.FactureId &&
+                       this.ArticleId == other.ArticleId;
+            }
+
+            return false;
+        }
     }
 }

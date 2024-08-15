@@ -61,5 +61,24 @@ namespace Kernel.Entities
             set => SetField(ref this._data.prixttc, value);
         }
         #endregion
+
+        public override string ToString()
+        {
+            return this.Libelle;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj != null && obj is Article other)
+            {
+                return this.Id == other.Id &&
+                       this.Libelle == other.Libelle &&
+                       this.PrixHT == other.PrixHT &&
+                       this.TxTVA == other.TxTVA &&
+                       this.PrixTTC == other.PrixTTC;
+            }
+
+            return base.Equals(obj);
+        }
     }
 }
