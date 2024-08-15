@@ -1,12 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Kernel;
+using Kernel.Entities;
+using Kernel.Filters;
 
 namespace BLL.Models
 {
-    internal class DevisModel
+    public class DevisModel : GenericViewModel<Devis>
     {
+        public DevisModel()
+        {
+            this.DataContext = new();
+            this.IsNew = true;
+        }
+
+        public DevisModel(CFilter filter)
+        {
+            this.DataContext = ServicesManager.DataBase.GetFirstEntity<Devis>(filter);
+        }
+
+        public override bool IsModified(Devis oldValue)
+        {
+            return !this.DataContext.Equals(oldValue);
+        }
     }
 }

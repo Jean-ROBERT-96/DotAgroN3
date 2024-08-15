@@ -1,12 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Kernel;
+using Kernel.Entities;
+using Kernel.Filters;
 
 namespace BLL.Models
 {
-    internal class EmployeeModel
+    public class EmployeeModel : GenericViewModel<Employee>
     {
+        public EmployeeModel()
+        {
+            this.DataContext = new();
+            this.IsNew = true;
+        }
+
+        public EmployeeModel(CFilter filter)
+        {
+            this.DataContext = ServicesManager.DataBase.GetFirstEntity<Employee>(filter);
+        }
+
+        public override bool IsModified(Employee oldValue)
+        {
+            return !this.DataContext.Equals(oldValue);
+        }
     }
 }

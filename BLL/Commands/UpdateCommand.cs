@@ -16,9 +16,9 @@ namespace BLL.Commands
             return true;
         }
 
-        public override void Execute()
+        public override bool Execute()
         {
-            ServicesManager.DataBase.UpdateEntity(_id, viewModel.DataContext);
+            return ServicesManager.DataBase.UpdateEntity(_id, viewModel.DataContext);
         }
     }
 }

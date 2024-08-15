@@ -16,9 +16,9 @@ namespace BLL.Commands
             return true;
         }
 
-        public override void Execute()
+        public override bool Execute()
         {
-            ServicesManager.DataBase.Delete<T>(_id);
+            return ServicesManager.DataBase.Delete<T>(_id);
         }
     }
 }

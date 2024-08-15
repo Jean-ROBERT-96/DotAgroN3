@@ -1,9 +1,8 @@
 ﻿using Kernel;
-using Kernel.Entities;
 
 namespace BLL.Commands
 {
-    internal class CreateCommand<T> : GenericActionCommand<T> where T : Adresse
+    public class CreateCommand<T> : GenericActionCommand<T> where T : Entity
     {
         public CreateCommand(GenericViewModel<T> entityType) : base(entityType)
         {
@@ -14,9 +13,14 @@ namespace BLL.Commands
             return true;
         }
 
-        public override void Execute()
+        public override bool Execute()
         {
-            ServicesManager.DataBase.Create(viewModel.DataContext);
+            if (ServicesManager.DataBase.Create(viewModel.DataContext))
+            {
+                viewModel.IsNew = false;
+                return true;
+            }
+            return false;
         }
     }
 }
