@@ -84,11 +84,11 @@ namespace Kernel.Entities
         public override int GetHashCode()
         {
             var hash = new HashCode();
-            hash.Add(Id);
-            hash.Add(Libelle);
-            hash.Add(PrixHT);
-            hash.Add(TxTVA);
-            hash.Add(PrixTTC);
+            hash.Add(this.Id);
+            hash.Add(this.Libelle);
+            hash.Add(this.PrixHT);
+            hash.Add(this.TxTVA);
+            hash.Add(this.PrixTTC);
 
             return hash.ToHashCode();
         }
