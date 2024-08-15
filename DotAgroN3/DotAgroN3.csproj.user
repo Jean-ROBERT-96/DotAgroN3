@@ -7,6 +7,26 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="ConnectionDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Frames\FrmClients.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Listes\FrmListeClients.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="ConnectionDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Frames\FrmClients.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Listes\FrmListeClients.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>

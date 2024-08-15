@@ -2,6 +2,7 @@
 using Kernel.Entities;
 using Kernel.Filters;
 using System.Windows;
+using System.Windows.Controls;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace DotAgroN3
@@ -14,21 +15,28 @@ namespace DotAgroN3
         public MainWindow()
         {
             InitializeComponent();
-            //this.CreateAdresse();
-            var add1 = ServicesManager.DataBase.GetFirstEntity<Adresse>();
-            var add2 = ServicesManager.DataBase.GetFirstEntity<Adresse>(Adresse._Id.Equal(6));
-            var add3 = ServicesManager.DataBase.GetFirstEntity<Adresse>(Adresse._Id.Equal(1));
         }
 
-        //private void CreateAdresse()
-        //{
-        //    var test = new Adresse();
-        //    test.Libelle = "test";
-        //    test.Adresse1 = "18, rue de la Testing";
-        //    test.CodePostal = 75001;
-        //    test.Ville = "Paris";
+        private void AddTab(string header, UserControl content)
+        {
+            TabItem tabItem = new TabItem();
+            StackPanel headerPanel = new StackPanel { Orientation = Orientation.Horizontal };
+            TextBlock headerText = new TextBlock { Text = header };
+            Button closeButton = new Button { Content = "X", Width = 20, Height = 20, Margin = new Thickness(5, 0, 0, 0) };
+            closeButton.Click += (s, e) => CloseTab(tabItem);
 
-        //    ServicesManager.DataBase.Create(test);
-        //}
+            headerPanel.Children.Add(headerText);
+            headerPanel.Children.Add(closeButton);
+
+            tabItem.Header = headerPanel;
+            tabItem.Content = content;
+            tabControl.Items.Add(tabItem);
+            tabControl.SelectedItem = tabItem;
+        }
+
+        private void CloseTab(TabItem tabItem)
+        {
+            tabControl.Items.Remove(tabItem);
+        }
     }
 }

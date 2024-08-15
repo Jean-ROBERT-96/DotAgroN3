@@ -1,10 +1,32 @@
 ﻿using Kernel.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.Configuration;
+using System.Text.Json;
 
 namespace DAL
 {
+    /// <summary>
+    /// Réservé à l'utilisation de la migration EF Core.
+    /// </summary>
+    public class DataContextFactory : IDesignTimeDbContextFactory<DataContext>
+    {
+        public DataContext CreateDbContext(string[] args)
+        {
+            var currentDirectory = Directory.GetCurrentDirectory();
+            var projectRoot = Directory.GetParent(currentDirectory).Parent.FullName;
+            var json = File.ReadAllText(Path.Combine(projectRoot, "DotAgroN3", "DotAgroN3", "appsettings.json"));
+            var jsonDocument = JsonDocument.Parse(json);
+            var connectionString = jsonDocument.RootElement
+                .GetProperty("ConnectionStrings")
+                .GetProperty("DefaultConnection")
+                .GetString();
+
+            var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
+            optionsBuilder.UseMySQL(connectionString);
+            return new DataContext(optionsBuilder.Options);
+        }
+    }
+
     public class DataContext : DbContext
     {
         public DbSet<Adresse> Adresses { get; set; }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Kernel.RightManagement;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Kernel.Entities
@@ -14,6 +15,9 @@ namespace Kernel.Entities
             public string prenom;
             public string email;
             public string password;
+            public ushort clientdroit;
+            public ushort facturedroit;
+            public ushort devisdroit;
         }
         #endregion
 
@@ -23,6 +27,9 @@ namespace Kernel.Entities
         public static ColumnDescriptor _Prenom { get => (typeof(Utilisateur), nameof(Prenom)); }
         public static ColumnDescriptor _Email { get => (typeof(Utilisateur), nameof(Email)); }
         public static ColumnDescriptor _Password { get => (typeof(Utilisateur), nameof(Password)); }
+        public static ColumnDescriptor _ClientDroit { get => (typeof(Utilisateur), nameof(ClientDroit)); }
+        public static ColumnDescriptor _FactureDroit { get => (typeof(Utilisateur), nameof(FactureDroit)); }
+        public static ColumnDescriptor _DevisDroit { get => (typeof(Utilisateur), nameof(DevisDroit)); }
         #endregion
 
         #region Properties
@@ -60,6 +67,27 @@ namespace Kernel.Entities
             get => this._data.password;
             set => SetField(ref this._data.password, value);
         }
+
+        [Column("client_droit")]
+        public ushort ClientDroit
+        {
+            get => this._data.clientdroit;
+            set => SetField(ref this._data.clientdroit, value);
+        }
+
+        [Column("facture_droit")]
+        public ushort FactureDroit
+        {
+            get => this._data.facturedroit;
+            set => SetField(ref this._data.facturedroit, value);
+        }
+
+        [Column("devis_droit")]
+        public ushort DevisDroit
+        {
+            get => this._data.devisdroit;
+            set => SetField(ref this._data.devisdroit, value);
+        }
         #endregion
 
         public override string ToString()
@@ -73,7 +101,10 @@ namespace Kernel.Entities
                 return this.Id == other.Id &&
                        this.Nom == other.Nom &&
                        this.Prenom == other.Prenom &&
-                       this.Email == other.Email;
+                       this.Email == other.Email &&
+                       this.ClientDroit == other.ClientDroit &&
+                       this.FactureDroit == other.FactureDroit &&
+                       this.DevisDroit == other.DevisDroit;
             }
 
             return false;
@@ -86,8 +117,33 @@ namespace Kernel.Entities
             hash.Add(this.Nom);
             hash.Add(this.Prenom);
             hash.Add(this.Email);
+            hash.Add(this.ClientDroit);
+            hash.Add(this.FactureDroit);
+            hash.Add(this.DevisDroit);
 
             return hash.ToHashCode();
+        }
+
+        public static Utilisateur ConnectedUser { get; set; }
+
+        public bool HasClientRight(ClientRight right)
+        {
+            return HasRight(this.ClientDroit, (ushort)right);
+        }
+
+        public bool HasFactureRight(FactureRight right)
+        {
+            return HasRight(this.FactureDroit, (ushort)right);
+        }
+
+        public bool HasDevisRight(DevisRight right)
+        {
+            return HasRight(this.DevisDroit, (ushort)right);
+        }
+
+        private static bool HasRight(ushort userRight, ushort right)
+        {
+            return (userRight & right) == right;
         }
     }
 }
