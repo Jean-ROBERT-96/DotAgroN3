@@ -28,5 +28,18 @@ namespace UnitTests
             get => this._data.data;
             set => SetField(ref this._data.data, value);
         }
+
+        public override string ToString()
+        {
+            return this.Data;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is TestEntity entity)
+                return entity.Id == this.Id && entity.Data == this.Data;
+
+            return base.Equals(obj);
+        }
     }
 }
