@@ -87,11 +87,11 @@ namespace Kernel.Entities
         public override int GetHashCode()
         {
             var hash = new HashCode();
-            hash.Add(Id);
-            hash.Add(SocieteId);
-            hash.Add(ClientId);
-            hash.Add(Date);
-            hash.Add(Description);
+            hash.Add(this.Id);
+            hash.Add(this.SocieteId);
+            hash.Add(this.ClientId);
+            hash.Add(this.Date);
+            hash.Add(this.Description);
 
             return hash.ToHashCode();
         }

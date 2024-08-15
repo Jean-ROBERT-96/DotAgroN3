@@ -171,19 +171,19 @@ namespace Kernel.Entities
         public override int GetHashCode()
         {
             var hash = new HashCode();
-            hash.Add(Id);
-            hash.Add(ClientId);
-            hash.Add(DevisId);
-            hash.Add(AdresseFacturationId);
-            hash.Add(AdresseLivraisonId);
-            hash.Add(SocieteId);
-            hash.Add(MtHT);
-            hash.Add(MtTVA);
-            hash.Add(MtTTC);
-            hash.Add(NetAPayer);
-            hash.Add(Reglee);
-            hash.Add(DateFacturation);
-            hash.Add(DateCreation);
+            hash.Add(this.Id);
+            hash.Add(this.ClientId);
+            hash.Add(this.DevisId);
+            hash.Add(this.AdresseFacturationId);
+            hash.Add(this.AdresseLivraisonId);
+            hash.Add(this.SocieteId);
+            hash.Add(this.MtHT);
+            hash.Add(this.MtTVA);
+            hash.Add(this.MtTTC);
+            hash.Add(this.NetAPayer);
+            hash.Add(this.Reglee);
+            hash.Add(this.DateFacturation);
+            hash.Add(this.DateCreation);
 
             return hash.ToHashCode();
         }

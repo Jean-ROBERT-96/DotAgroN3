@@ -144,17 +144,17 @@ namespace Kernel.Entities
         public override int GetHashCode()
         {
             var hash = new HashCode();
-            hash.Add(Id);
-            hash.Add(Libelle);
-            hash.Add(Adresse1);
-            hash.Add(Adresse2);
-            hash.Add(Adresse3);
-            hash.Add(Complement);
-            hash.Add(CodePostal);
-            hash.Add(Ville);
-            hash.Add(Etage);
-            hash.Add(Porte);
-            hash.Add(Batiment);
+            hash.Add(this.Id);
+            hash.Add(this.Libelle);
+            hash.Add(this.Adresse1);
+            hash.Add(this.Adresse2);
+            hash.Add(this.Adresse3);
+            hash.Add(this.Complement);
+            hash.Add(this.CodePostal);
+            hash.Add(this.Ville);
+            hash.Add(this.Etage);
+            hash.Add(this.Porte);
+            hash.Add(this.Batiment);
 
             return hash.ToHashCode();
         }

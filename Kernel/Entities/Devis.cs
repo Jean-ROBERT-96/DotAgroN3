@@ -108,13 +108,13 @@ namespace Kernel.Entities
         public override int GetHashCode()
         {
             var hash = new HashCode();
-            hash.Add(Id);
-            hash.Add(ClientId);
-            hash.Add(SocieteId);
-            hash.Add(MtHT);
-            hash.Add(MtTVA);
-            hash.Add(MtTTC);
-            hash.Add(DateRedaction);
+            hash.Add(this.Id);
+            hash.Add(this.ClientId);
+            hash.Add(this.SocieteId);
+            hash.Add(this.MtHT);
+            hash.Add(this.MtTVA);
+            hash.Add(this.MtTTC);
+            hash.Add(this.DateRedaction);
 
             return hash.ToHashCode();
         }
