@@ -76,7 +76,18 @@ namespace Kernel.Entities
                        this.Email == other.Email;
             }
 
-            return base.Equals(obj);
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Id);
+            hash.Add(Nom);
+            hash.Add(Prenom);
+            hash.Add(Email);
+
+            return hash.ToHashCode();
         }
     }
 }

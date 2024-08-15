@@ -72,5 +72,16 @@ namespace Kernel.Entities
 
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(this.Id);
+            hash.Add(this.Nom);
+            hash.Add(this.Siret);
+            hash.Add(this.AdresseId);
+
+            return hash.ToHashCode();
+        }
     }
 }

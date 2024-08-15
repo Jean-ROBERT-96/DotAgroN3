@@ -165,7 +165,27 @@ namespace Kernel.Entities
                        this.DateCreation == other.DateCreation;
             }
 
-            return base.Equals(obj);
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Id);
+            hash.Add(ClientId);
+            hash.Add(DevisId);
+            hash.Add(AdresseFacturationId);
+            hash.Add(AdresseLivraisonId);
+            hash.Add(SocieteId);
+            hash.Add(MtHT);
+            hash.Add(MtTVA);
+            hash.Add(MtTTC);
+            hash.Add(NetAPayer);
+            hash.Add(Reglee);
+            hash.Add(DateFacturation);
+            hash.Add(DateCreation);
+
+            return hash.ToHashCode();
         }
     }
 }

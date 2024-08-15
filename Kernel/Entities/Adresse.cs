@@ -138,7 +138,25 @@ namespace Kernel.Entities
                        this.Batiment == other.Batiment;
             }
 
-            return base.Equals(obj);
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Id);
+            hash.Add(Libelle);
+            hash.Add(Adresse1);
+            hash.Add(Adresse2);
+            hash.Add(Adresse3);
+            hash.Add(Complement);
+            hash.Add(CodePostal);
+            hash.Add(Ville);
+            hash.Add(Etage);
+            hash.Add(Porte);
+            hash.Add(Batiment);
+
+            return hash.ToHashCode();
         }
     }
 }

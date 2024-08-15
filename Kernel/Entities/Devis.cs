@@ -102,7 +102,21 @@ namespace Kernel.Entities
                        this.DateRedaction == other.DateRedaction;
             }
 
-            return base.Equals(obj);
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Id);
+            hash.Add(ClientId);
+            hash.Add(SocieteId);
+            hash.Add(MtHT);
+            hash.Add(MtTVA);
+            hash.Add(MtTTC);
+            hash.Add(DateRedaction);
+
+            return hash.ToHashCode();
         }
     }
 }

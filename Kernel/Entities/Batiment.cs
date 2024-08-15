@@ -71,7 +71,18 @@ namespace Kernel.Entities
                        this.AdresseId == other.AdresseId &&
                        this.SocieteId == other.SocieteId;
             }
-            return base.Equals(obj);
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Id);
+            hash.Add(Libelle);
+            hash.Add(AdresseId);
+            hash.Add(SocieteId);
+
+            return hash.ToHashCode();
         }
     }
 }

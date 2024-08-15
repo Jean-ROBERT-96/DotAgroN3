@@ -92,7 +92,20 @@ namespace Kernel.Entities
                        this.ServiceId == other.ServiceId;
             }
 
-            return base.Equals(obj);
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Id);
+            hash.Add(Nom);
+            hash.Add(Prenom);
+            hash.Add(BatimentId);
+            hash.Add(SocieteId);
+            hash.Add(ServiceId);
+
+            return hash.ToHashCode();
         }
     }
 }

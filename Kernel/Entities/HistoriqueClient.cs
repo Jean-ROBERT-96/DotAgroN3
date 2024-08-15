@@ -81,7 +81,19 @@ namespace Kernel.Entities
                        this.Description == other.Description;
             }
 
-            return base.Equals(obj);
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Id);
+            hash.Add(SocieteId);
+            hash.Add(ClientId);
+            hash.Add(Date);
+            hash.Add(Description);
+
+            return hash.ToHashCode();
         }
     }
 }

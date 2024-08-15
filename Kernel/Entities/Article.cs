@@ -78,7 +78,19 @@ namespace Kernel.Entities
                        this.PrixTTC == other.PrixTTC;
             }
 
-            return base.Equals(obj);
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Id);
+            hash.Add(Libelle);
+            hash.Add(PrixHT);
+            hash.Add(TxTVA);
+            hash.Add(PrixTTC);
+
+            return hash.ToHashCode();
         }
     }
 }

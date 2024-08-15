@@ -102,5 +102,19 @@ namespace Kernel.Entities
 
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Id);
+            hash.Add(NLigne);
+            hash.Add(Type);
+            hash.Add(Quantite);
+            hash.Add(Libelle);
+            hash.Add(DevisId);
+            hash.Add(ArticleId);
+
+            return hash.ToHashCode();
+        }
     }
 }

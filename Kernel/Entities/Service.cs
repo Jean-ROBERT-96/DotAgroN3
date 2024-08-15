@@ -60,7 +60,17 @@ namespace Kernel.Entities
                        this.SocieteId == other.SocieteId;
             }
 
-            return base.Equals(obj);
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(this.Id);
+            hash.Add(this.Libelle);
+            hash.Add(this.SocieteId);
+
+            return hash.ToHashCode();
         }
     }
 }
